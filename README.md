@@ -16,4 +16,4 @@
 | :------: | :----- | :-----------: | :---: | :--------------- |
 | WHERE | Определяет фильтр выборки | После простого запроса с SELECT | Через операторы сравнения: =; <; >; =>; =< | SELECT unit_price FROM orders WHERE unit_price > 20 |
 | AND | Объеденет несколько фильтров виборки | После полного блока условия после WHERE | Через слово AND любое количество фильтров | SELECT unit_price FROM orders WHERE unit_price > 20 AND unit_price < 40 |
-| OR | В выборку попадают все фильтры которые проходят через ИЛИ | После полного блока условия после WHERE | Через слово OR любое количество фильтров | SELECT unit_price FROM orders WHERE country = 'UK' OR country = 'USA'|
+| OR | В выборку попадают все фильтры которые проходят через ИЛИ | После полного блока условия после WHERE | Через слово OR любое количество фильтров | SELECT country_entity FROM countries WHERE country = 'UK' OR country = 'USA'|
