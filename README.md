@@ -1,1 +1,2 @@
-# PosgreSQL-shorts
+# Выжимка по работе с PosgreSQL
+
