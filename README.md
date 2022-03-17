@@ -8,10 +8,12 @@
 | FROM | Определяет таблицу из которой выбирать данные | После параметров ключевого слова SELECT | - | SELECT country FROM countries | 
 | DISTINCT | Убирает строки с повторяющимися значениями | После SELECT | - | SELECT DISTINCT country FROM countries |
 | COUNT | Подсчитывает количество строк столбца запроса | После SELECT | - | SELECT COUNT (country) FROM countries | 
-| COUNT + DISTINCT | Подсчитывает уникальное количество строк столбца запроса | После SELECT | - | SELECT COUNT (DISTINCT person_name) 
+| COUNT + DISTINCT | Подсчитывает уникальное количество строк столбца запроса | После SELECT | - | SELECT COUNT (DISTINCT person_name) |
 
 ## Фильтрация простых запросов с SELECT
 
 | Ключевое слово | Описание | Место в запросе | Детали | Пример использования |
 | :------: | :----- | :-----------: | :---: | :--------------- |
-| WHERE | Определяет фильтр выборки | После простого запроса с SELECT | Через операторы сравнения: =; <; >; =>; =< | SELECT unit_price FROM orders WHERE unit_price > 20
+| WHERE | Определяет фильтр выборки | После простого запроса с SELECT | Через операторы сравнения: =; <; >; =>; =< | SELECT unit_price FROM orders WHERE unit_price > 20 |
+| AND | Объеденет несколько фильтров виборки | После полного блока условия после WHERE | Через слово AND любое количество фильтров | SELECT unit_price FROM orders WHERE unit_price > 20 AND unit_price < 40 |
+| OR | В выборку попадают все фильтры которые проходят через ИЛИ | После полного блока условия после WHERE | Через слово OR любое количество фильтров | SELECT unit_price FROM orders WHERE country = 'UK' OR country = 'USA'|
