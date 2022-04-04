@@ -1,4 +1,5 @@
-/* Выбрать колонки ship_city и даты этих заказов order_date з таблицы orders, где ship_city является Лондон и сгрупировать по возрастанию по дате */
+/* Выбрать колонки ship_city и даты этих заказов order_date з таблицы orders, 
+где ship_city является Лондон и сгрупировать по возрастанию по дате */
 SELECT ship_city, order_date
 FROM orders
 WHERE ship_city = 'London'

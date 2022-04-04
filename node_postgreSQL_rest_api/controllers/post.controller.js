@@ -16,5 +16,5 @@ class PostController {
     res.json(posts.rows);
   }
 }
-
+ 
 module.exports = new PostController();
