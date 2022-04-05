@@ -8,6 +8,7 @@
   - [Основные типы данных](#основные-типы-данных)
   - [Операторы условий и предикты](#операторы-условий-и-предикты)
   - [Простые запросы SELECT](#простые-запросы-select)
+    - [Подробно о фильтре LIKE](#подробно-о-фильтре-like)
 
 ## Основные типы данных
 
@@ -80,5 +81,31 @@ SELECT запросы это основа РostgreSQL в случае фильт
 | MIN | Находит минимальное или самую раннюю строку исходя из условия запроса | SELECT MIN (<column_name>) | После SELECT | [08_min_max_avg.sql](01_simple_queries_with_select/08_min_max_avg.sql) |
 | MAX | Находит максимальное или самую позднюю строку исходя из условия запроса | SELECT MAX (<column_name>) | После SELECT | [08_min_max_avg.sql](01_simple_queries_with_select/08_min_max_avg.sql) |
 | AVG | Находит среднее значение строки исходя из условия запроса | SELECT AVG (<column_name>) | После SELECT | [08_min_max_avg.sql](01_simple_queries_with_select/08_min_max_avg.sql) |
+| LIKE | Лёгкая версия регулярных выражений. После LIKE задаётся шаблон, который служит фильтров | SELECT <column_name> <br/> FROM <table_name> <br/> WHERE <column_name> <br/> LIKE <like_string> | После WHERE | [09_like.sql](01_simple_queries_with_select/09_like.sql) |
+| LIMIT | Ограничивает количество строк в результирующем наборе | SELECT <column_name> <br/> FROM <table_name> <br/> LIMIT <limit_number> | Вконце запроса | [10_limit.sql](01_simple_queries_with_select/10_limit.sql) |
+| IS NULL | Выбираются пустые строки, которые находятся в указанном столбце в условии поиска | SELECT <column_name> <br/> FROM <table_name>  <br/> WHERE <column_name> IS NULL | После WHERE на необходимый столбец | [11_check_on_null.sql](01_simple_queries_with_select/11_check_on_null.sql) |
+| IS NOT NULL | Выбираются все не пустые строки, которые находятся в указанном столбце в условии поиска | SELECT <column_name> <br/> FROM <table_name>  <br/> WHERE <column_name> IS NOT NULL | После WHERE на необходимый столбец | [11_check_on_null.sql](01_simple_queries_with_select/11_check_on_null.sql) |
+| GROUP BY | Группирует данные по значениям из указанного столбца | SELECT <column_name>, SUM(<column_name>) <br/>  FROM <table_name> <br/>  GROUP BY <column_name> <br/>  ORDER BY SUM(<column_name>) DESC | В месте, где необходима группировка | [12_group_by](01_simple_queries_with_select/12_group_by.sql) |
+| HAVING | Вторичный фильтр, когда WHERE - первичный фильтр. Используется, когда нужно допольнительно отфилтровать результат после работы WHERE | SELECT <column_name> (<column_name> * <column_name>) FROM <table_name> WHERE <condition_name>  GROUP BY <column_name> HAVING SUM(<column_name> * <column_name>)  <condition_name> | [13_having.sql](01_simple_queries_with_select/13_having.sql) |
+| UNION | Объеденяет уникальные строки из общих столбцов разных таблиц | SELECT <column_name> <br/> FROM <table_name_1> UNION SELECT <column_name> <br/> FROM <table_name_2> | Между двумя запросами | [14_union_intersect_except.sql](01_simple_queries_with_select/14_union_intersect_except.sql) |
+| UNION ALL | Объеденяет абсолютно все строки из общих столбцов разных таблиц | SELECT <column_name> <br/> FROM <table_name_1> UNION ALL SELECT <column_name> <br/> FROM <table_name_2> | Между двумя запросами | [14_union_intersect_except.sql](01_simple_queries_with_select/14_union_intersect_except.sql) |
+| INTERSECT | Выводит пересекающиеся уникальные строки из общих столбцов разных таблиц | SELECT <column_name> <br/> FROM <table_name_1> INTERSECT SELECT <column_name> <br/> FROM <table_name_2> | Между двумя запросами | [14_union_intersect_except.sql](01_simple_queries_with_select/14_union_intersect_except.sql) |
+| INTERSECT ALL | Выводит пересекающиеся абсолютно все строки из общих столбцов разных таблиц | SELECT <column_name> <br/> FROM <table_name_1> INTERSECT ALL SELECT <column_name> <br/> FROM <table_name_2> | Между двумя запросами | [14_union_intersect_except.sql](01_simple_queries_with_select/14_union_intersect_except.sql) |
+| EXCEPT | Выводит не пересекающиеся уникальные строки из общих столбцов разных таблиц | SELECT <column_name> <br/> FROM <table_name_1> EXCEPT SELECT <column_name> <br/> FROM <table_name_2> | Между двумя запросами | [14_union_intersect_except.sql](01_simple_queries_with_select/14_union_intersect_except.sql) |
+| EXCEPT ALL | Выводит не пересекающиеся абсолютно все строки из общих столбцов разных таблиц | SELECT <column_name> <br/> FROM <table_name_1> EXCEPT ALL SELECT <column_name> <br/> FROM <table_name_2> | Между двумя запросами | [14_union_intersect_except.sql](01_simple_queries_with_select/14_union_intersect_except.sql) |
 
 
+### Подробно о фильтре LIKE
+Фильтр LIKE используется для того, чтобы искать строки похожие на заданный шаблон. <br/>
+**Плейсхордеры:** <br/>
+- `%` - означающий 0, 1 или более символов. <br/>
+- `_` (нижнее подчеркивание) означает ровно 1 любой символ. <br/> <br/>
+
+**Использование:** <br/>
+- LIKE `U%` - все выражение начинающиеся с U. 
+- LIKE `%a` - все выражение заканчивающееся на а.
+- LIKE `%гусь%` - все строки, где есть словарный набор - гусь. 
+- LIKE `J%n` - все строки, которые начинаются на J и кончаются на n. 
+- LIKE `_oh_` - все строки имеющие ровно один символ до и ровно один символ после oh. 
+- LIKE `_oh%` - все строки где ровно один символ находится перед oh и произвольное количество символов после oh.
+  
