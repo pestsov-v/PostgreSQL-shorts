@@ -64,7 +64,7 @@ PostgreSQL поддерживает следующие предикты:
 ## Простые запросы SELECT
 SELECT запросы это основа РostgreSQL в случае фильтрации и создании результирующих наборов из базы данных. В SELECT активно используются операторы условий для дополнительной филтрации необходимых строк. 
 
-| Параметр | Пояснение | Синтаксис | Порядок следования | Файл с примерами | 
+| Параметр | Пояснение | Синтаксис | Порядок следования | Примеры | 
 | :------: | :-------- | :-------- | :----------------- | :--------------- |
 | SELECT | Выбирает необходимые колонки | SELECT <column_name> | Первым в каждом запросе | - | 
 | FROM | Указывается таблица из которой выбирать данные | FROM <table_name> | После SELECT | - |
@@ -76,5 +76,9 @@ SELECT запросы это основа РostgreSQL в случае фильт
 | BETWEEN | Создаёт диапазон которые отфильтровывает результирующий набор. Включает границы. Подобный фильтр может быть создан и с помощью AND | SELECT <column_name> <br/> FROM <table_name> <br/> WHERE <column_name> BETWEEN <condition_name_1> AND <condition_name_2> | После WHERE | [05_between.sql](01_simple_queries_with_select/05_between.sql) |
 | IN | Является более удобным аналогом OR в случае, когда условий много. Подобный фильтр может быть создан и с помощью OR | WHERE <column_name> IN (<condition_name_1>, <condition_name_2>, <condition_name_n> | После WHERE | [06_in_not_in.sql](01_simple_queries_with_select/06_in_not_in.sql) |
 | NOT IN | В результирующий набор попадают все строки, которые не подпадают под фильтр. Является противоположностью IN | WHERE <column_name> NOT IN (<condition_name_1>, <condition_name_2>, <condition_name_n> | После WHERE | [06_in_not_in.sql](01_simple_queries_with_select/06_in_not_in.sql) |
+| ORDER BY | Сортирует результирующий набор по убыванию или по возрастанию. По умолчанию сортирует по возрастанию | SELECT <column_name> FROM <table_name> ORDER BY <column_name> | Когда необходимо результирующий набор соответствующе отсортировать. Может быть как перед LIMIT так и после определенного WHERE | [07_order_by.sql](01_simple_queries_with_select/07_order_by.sql) |
+| MIN | Находит минимальное или самую раннюю строку исходя из условия запроса | SELECT MIN (<column_name>) | После SELECT | [08_min_max_avg.sql](01_simple_queries_with_select/08_min_max_avg.sql) |
+| MAX | Находит максимальное или самую позднюю строку исходя из условия запроса | SELECT MAX (<column_name>) | После SELECT | [08_min_max_avg.sql](01_simple_queries_with_select/08_min_max_avg.sql) |
+| AVG | Находит среднее значение строки исходя из условия запроса | SELECT AVG (<column_name>) | После SELECT | [08_min_max_avg.sql](01_simple_queries_with_select/08_min_max_avg.sql) |
 
 
