@@ -6,6 +6,7 @@
 - [Выжимка по работе с PosgreSQL](#выжимка-по-работе-с-posgresql)
   - [Оглавление](#оглавление)
   - [Основные типы данных](#основные-типы-данных)
+  - [Операторы условий и предикты](#операторы-условий-и-предикты)
   - [Простые запросы SELECT](#простые-запросы-select)
 
 ## Основные типы данных
@@ -37,4 +38,43 @@
 - XML
 - NULL - отсутствие данных
 
+## Операторы условий и предикты
+PosrgreSQL поддерживает следующие операторы условий:
+| Оператор условий | Описание |
+| :--------------: | :------- |
+| < | строго меньше |
+| > | строго больше |
+| <= | меньше или равно |
+| >= | больше или равно |
+| = | равно |
+| <> или != | не равно |
+
+PostgreSQL поддерживает следующие предикты: 
+| Оператор условий | Описание |
+| :--------------: | :------- |
+| IS NULL | cодержание значений NULL. Уточнение: NULL это неопределённость, а не значение NULL как в JS |
+| IS NOT NULL | отсутствует ли значение NULL |
+| IS TRUE | cодержание значений TRUE |
+| IS NOT TRUE | отсутствует ли значение TRUE |
+| IS FALSE | cодержание значений FALSE |
+| IS NOT FALSE | отсутствует ли значение FALSE |
+| IS UNKNOWN | cодержание значений NULL |
+| IS NOT UNKNOWN | отсутствует ли значение UNKNOWN |
+
 ## Простые запросы SELECT
+SELECT запросы это основа РostgreSQL в случае фильтрации и создании результирующих наборов из базы данных. В SELECT активно используются операторы условий для дополнительной филтрации необходимых строк. 
+
+| Параметр | Пояснение | Синтаксис | Порядок следования | Файл с примерами | 
+| :------: | :-------- | :-------- | :----------------- | :--------------- |
+| SELECT | Выбирает необходимые колонки | SELECT <column_name> | Первым в каждом запросе | - | 
+| FROM | Указывается таблица из которой выбирать данные | FROM <table_name> | После SELECT | - |
+| DISTINCT | Убирает повторяющиеся строки | SELECT DISTINCT (<colemn_name>) | После SELECT | [01_distinct.sql](01_simple_queries_with_select/01_distinct.sql) |
+| COUNT | Возвращает количество строк | SELECT COUNT (<colemn_name>) | После SELECT | [02_count.sql](01_simple_queries_with_select/02_count.sql) |
+| WHERE | Возвращает строки, которые проходят условие указанное в WHERE | SELECT <column_name> <br/> FROM <table_name> <br/> WHERE <condition_name> | После FROM | [03_where.sql](01_simple_queries_with_select/03_where.sql) |
+| AND | Создаёт несколько условий в WHERE, чтобы в результирующий набор попали значения проходящие несколько условий | SELECT <column_name> <br/> FROM <table_name> <br/> WHERE <condition_name_1> AND <condition_name_n> | После WHERE | [04_and_ur.sql](01_simple_queries_with_select/04_and_or.sql) |
+| OR| Создаёт несколько условий в WHERE, чтобы в результирующий набор попали значения проходящие под одно из условий | SELECT <column_name> <br/> FROM <table_name> <br/> WHERE <condition_name_1> OR <condition_name_n> | После WHERE | [04_and_ur.sql](01_simple_queries_with_select/04_and_or.sql) |
+| BETWEEN | Создаёт диапазон которые отфильтровывает результирующий набор. Включает границы. Подобный фильтр может быть создан и с помощью AND | SELECT <column_name> <br/> FROM <table_name> <br/> WHERE <column_name> BETWEEN <condition_name_1> AND <condition_name_2> | После WHERE | [05_between.sql](01_simple_queries_with_select/05_between.sql) |
+| IN | Является более удобным аналогом OR в случае, когда условий много. Подобный фильтр может быть создан и с помощью OR | WHERE <column_name> IN (<condition_name_1>, <condition_name_2>, <condition_name_n> | После WHERE | [06_in_not_in.sql](01_simple_queries_with_select/06_in_not_in.sql) |
+| NOT IN | В результирующий набор попадают все строки, которые не подпадают под фильтр. Является противоположностью IN | WHERE <column_name> NOT IN (<condition_name_1>, <condition_name_2>, <condition_name_n> | После WHERE | [06_in_not_in.sql](01_simple_queries_with_select/06_in_not_in.sql) |
+
+
