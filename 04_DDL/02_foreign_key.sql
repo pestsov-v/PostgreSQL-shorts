@@ -1,4 +1,4 @@
-
+/* Таблица, с которой будет происходить связывание */
 CREATE TABLE chair 
 (
     publisher_id int,
